@@ -21,7 +21,7 @@ export interface EnvVarConfig {
   transform?: (value: string) => unknown;
 }
 
-export interface ParsedConfig<T extends Record<string, EnvVarConfig>> {
+export type ParsedConfig<T extends Record<string, EnvVarConfig>> = {
   [K in keyof T]: T[K]["type"] extends "number"
     ? number
     : T[K]["type"] extends "boolean"
@@ -29,7 +29,7 @@ export interface ParsedConfig<T extends Record<string, EnvVarConfig>> {
     : T[K]["type"] extends "json"
     ? unknown
     : string;
-}
+};
 
 export interface ConfigValidationResult {
   valid: boolean;
